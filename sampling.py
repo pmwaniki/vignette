@@ -1,9 +1,14 @@
+
+import os
 from pathlib import Path
 import numpy as np
 import pandas as pd
+from dotenv import load_dotenv
+load_dotenv(".env")
 
+data_folder=Path(os.getenv("DATA_FOLDER"))
 
-data=pd.read_excel('/home/pmwaniki/Dropbox/others/Ambrose/Sync study/Benchmark/data/Consolidated Dataset V7.xlsx')
+data=pd.read_excel(data_folder / 'Consolidated Dataset V7.xlsx')
 panels=data['Clinical Panel'].unique().tolist()
 
 panels_map = {
@@ -40,4 +45,24 @@ n_per_group=np.ceil(500/12)
 group_freq=data['Category'].value_counts().to_frame(name="Frequency").reset_index()
 
 sampled_small_groups=data.loc[data["Category"].isin(['Critical Care','Palliative Care'])].copy()
+
+remaining_n=500-len(sampled_small_groups)
+remaining_categories  = np.setdiff1d(data['Category'].unique(), sampled_small_groups['Category'].unique())
+remaining_categories=sorted(remaining_categories)
+n_per_group=int(np.ceil(remaining_n/len(remaining_categories)))
+rng = np.random.RandomState(123)
+
+sampled_records=[]
+for g in remaining_categories:
+    sub=data.loc[data['Category']==g].copy().reset_index(drop=True)
+    sampled_sub=sub.iloc[rng.permutation(n_per_group)]
+    sampled_records.append(sampled_sub)
+
+
+final_sample=pd.concat(sampled_records+[sampled_small_groups],axis=0,ignore_index=True)
+assert final_sample['Master_Index'].duplicated().sum()==0, "Duplicates found"
+
+final_sample['Category'].value_counts()
+
+final_sample.to_csv(data_folder / 'final_sample.csv',index=False)
 
