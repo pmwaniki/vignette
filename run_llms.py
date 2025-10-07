@@ -1,5 +1,6 @@
 import os
 from datetime import datetime
+from pathlib import Path
 
 import pandas as pd
 from dotenv import load_dotenv
@@ -16,7 +17,11 @@ from tqdm import tqdm
 
 load_dotenv()
 #. Please generate the new LLM responses using GPT 4.1, o3, the latest Gemini model, the latest DeepSeek and the latest Llama model ideally
-final_sample=pd.read_csv('/home/pmwaniki/Dropbox/others/Ambrose/Sync study/Benchmark/data/final_sample.csv')
+data_folder=Path(os.environ.get('DATA_FOLDER'))
+output_folder=Path(os.environ.get('OUTPUT_FOLDER'))
+results_folder=Path(os.environ.get('RESULTS_FOLDER'))
+
+final_sample=pd.read_csv(data_folder/'final_sample.csv')
 
 db = Surreal('https://aws.datahubweb.com:6000')
 db.signin({'username': "root", 'password': os.getenv("SURREALDB_PASSWORD")})
@@ -155,7 +160,7 @@ for model_str in model_def:
 
 result_data=pd.DataFrame(output_p)
 
-result_data.to_csv('/home/pmwaniki/Dropbox/others/Ambrose/Sync study/Benchmark/results/prompt_output.csv',index=False)
+result_data.to_csv(results_folder/'prompt_output.csv',index=False)
 
 # db.query("select * from prompt")
 model_dict.keys()
