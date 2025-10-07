@@ -1,4 +1,4 @@
-# Running LLMs and Statistical Analysis
+# Benchmarking Large Language Models and Clinicians Using Locally Generated Primary Healthcare Vignettes in Kenya 
 
 ## 1. Running LLMs
 
