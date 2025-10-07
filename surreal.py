@@ -8,7 +8,7 @@ load_dotenv()
 
 def create_conn():
     db=Surreal('https://aws.datahubweb.com:6000')
-    db.signin({'username': "root", 'password': os.getenv("SURREALDB_PASSWORD")})
+    db.signin({'username': "root", 'password': os.getenv("SURREALDB_PASSWORD"),'namespace':"llm_study","database":"benchmark"})
     db.use("llm_study", "benchmark")
     return db
 
