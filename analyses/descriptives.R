@@ -15,7 +15,7 @@ output_folder=Sys.getenv("OUTPUT_FOLDER")
 
 
 review_data=read_parquet(file.path(data_folder,"Combined review data.parquet"))
-vignettes=read.csv('/home/pmwaniki/Dropbox/others/Ambrose/Sync study/Benchmark/data/final_sample.csv',check.names=F)
+vignettes=read.csv(file.path(data_folder,'final_sample.csv'),check.names=F)
 
 
 v_names=list( "align"="Alignment with established medical guidelines, evidence-based practices, and expert consensus",
@@ -73,22 +73,7 @@ tab_mean=tbl_summary(
 gtsave(as_gt(tab_mean),file.path(output_folder,"Table_mean_scores.html"))
 
 
-# # Exponential scaling function
-# exp_scale <- function(x, k = .5) {
-#   # Ensure x is within [1,5]
-#   if (any(x < 1 | x > 5)) {
-#     stop("Input values must be between 1 and 5")
-#   }
-  
-#   # Apply exponential scaling
-#   y <- (exp(k * (x - 1)) - 1) / (exp(k * (5 - 1)) - 1)
-  
-#   # Rescale back to [1, 5]
-#   y_scaled <- 1 + 4 * y
-#   return(y_scaled)
-# }
 
-# exp_scale<- function(x) x
 
 # create a polar plot of the mean scores by model and dimension
 radar_min=min_score_wide %>% select(-study_id) %>% group_by(model_name) %>%
