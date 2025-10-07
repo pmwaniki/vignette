@@ -6,6 +6,9 @@ The script `run_llms.py` is used to generate responses from multiple large langu
 
 ## 2. Descriptive and Ordinal Logistic Regression
 
+The data for these analyses are available in the *datasets* folder. 'Combined review data.csv' or 'Combined review data.parquet' contain the expert panel ratings for the 507 vignettes, while 'Prompt responses.xlsx' contains 
+the formatted responses from the clinicians and LLM models.
+
 The R scripts `descriptives.R` and `analyses/models.R` provide the statistical analysis pipeline:
 
 - **Descriptive Statistics (`descriptives.R`):**  
