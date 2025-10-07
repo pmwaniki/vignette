@@ -2,6 +2,7 @@ import os
 
 from dotenv import load_dotenv
 from surrealdb import Surreal, RecordID
+from requests.exceptions import HTTPError
 
 load_dotenv()
 
