@@ -1,2 +1,9 @@
 .idea/
 .env
+re
+asyncio,os,json
+__pycache__/
+*.pyc
+venv/
+env/
+.vscode/
