@@ -2,7 +2,7 @@
 
 ## 1. Running LLMs
 
-The script `run_llms.py` is used to generate responses from multiple large language models (LLMs) for a set of clinical scenarios. It leverages the [LangChain](https://python.langchain.com/) framework to interface with different LLM providers, including OpenAI, Google, HuggingFace, and Ollama. The script reads the scenarios from a CSV file, sends each scenario to the selected LLMs, and stores the responses in a SurrealDB database as well as a CSV file. The models and system prompts can be configured within the script. This process enables standardized benchmarking of LLMs on the same set of clinical queries.
+The script `run_llms.py` is used to generate responses from multiple large language models (LLMs) for a set of clinical scenarios. It leverages the [LangChain](https://python.langchain.com/) framework to interface with different LLM providers, including OpenAI, Google, HuggingFace, and Ollama. The script reads the scenarios from a CSV file, sends each scenario to the selected LLMs, and stores the responses in a SurrealDB database as well as a CSV file. The models and system prompts can be configured within the script. This process enables standardised benchmarking of LLMs on the same set of clinical queries.
 
 ## 2. Descriptive and Ordinal Logistic Regression
 
